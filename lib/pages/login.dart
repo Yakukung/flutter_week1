@@ -1,83 +1,91 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'dart:developer';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+import 'package:flutter/material.dart';
+
+class LoginPage extends StatefulWidget {
+  LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String text = '';
+  int count = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const Column(
-        children: [
-          Text(
-            'Hello!!!',
-            style: TextStyle(
-                fontSize: 50, fontWeight: FontWeight.bold, color: Colors.red),
+      body: 
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Image.asset('assets/images/logo.png'),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'หมายเลขโทรศัพท์',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
+              const TextField(
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(borderSide: BorderSide(width: 1))),
+                  keyboardType: TextInputType.phone),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'รหัสผ่าน',
+                    style: TextStyle(
+                      fontSize: 18,
+                    fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
+              const TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(borderSide: BorderSide(width: 1))),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    TextButton(onPressed: register, child: const Text('ลงทะเบียนใหม่')),
+                    FilledButton(onPressed: login, child: const Text('เข้าสู่ระบบ')),
+                  ],
+                ),
+              ),
+              Text(text)
+            ],
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: TextField(
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(borderSide: BorderSide(width: 1))),
-            ),
-          )
-        ],
+        ),
       ),
-      // SizedBox(
-      //   width: MediaQuery.of(context).size.width,
-      //   child: Container(
-      //     color: Colors.blue[100],
-      //     child: Column(
-      //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //       children: [
-      //         Row(
-      //           mainAxisAlignment: MainAxisAlignment.start,
-      //           children: [
-      //             SizedBox(
-      //               width: 100,
-      //               height: 100,
-      //               child: Container(
-      //                 color: Colors.red[400],
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //         Row(
-      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //           children: [
-      //                   SizedBox(
-      //                   width: 100,
-      //                   height: 100,
-      //                   child: Container(
-      //                     color: Colors.purple[300],
-      //                   ),
-      //                 ),
-      //             Row(
-      //               mainAxisAlignment: MainAxisAlignment.end,
-      //               children: [
-      //                 SizedBox(
-      //                   width: 100,
-      //                   height: 100,
-      //                   child: Container(
-      //                     color: Colors.yellow[300],
-      //                   ),
-      //                 ),
-      //                 SizedBox(
-      //                   width: 100,
-      //                   height: 100,
-      //                   child: Container(
-      //                     color: Colors.green[300],
-      //                   ),
-      //                 ),
-      //               ],
-      //             ),
-      //           ],
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
+  }
+
+  void register() {
+    log('This is Register button');
+    setState(() {
+      text = 'Hello word!!!';
+    });
+  }
+
+  void login() {
+     setState(() {
+      count++;
+      text = 'Login time:$count';
+      log('Login time:$count');
+    });
   }
 }
